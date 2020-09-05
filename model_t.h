@@ -1,52 +1,37 @@
 #ifndef MODEL_T
 #define MODEL_T
+//#include <cstring>
 #include <vector>
 
 class Tetranom
 {
 private:
-  std::vector <std::vector<int>> m_coordinates; //coordinates
-  int m_id; //magic number describing the figure
-public:
-
-  Tetranom (std::vector<std::vector<int>> coord, int id): m_coordinates(coord), m_id(id) {}
-
-  std::vector <std::vector<int>> get_coord ();
-  //void show();
-  void get_id();
-
-};
-
-Tetranom o {{{0,0}, {0, 1}, {1,0}, {1,1}}, 1};
-
-class Field
-{
-private:
-  int m_height;
-  int m_width;
-  std::vector <std::vector <int>> Matrix;
-public:
-  Field (int height, int width);
-  void clean_row();
-  void create_figure();
-  bool collisions ();
-  void move_coord ();
-  int get_width() {return m_width; }
   
-};
-
-class Game
-{
-private:
-  int points;
-  Field *g_field;
+  char m_id; //magic symbol describing the figure; default is '0' for free blocks
+  std::vector <std::vector<char>> m_coordinates; //field describing each figure. the coordinates of each block are the numbers of the rows and the columns
 
 public:
-  Game (Field *game_field): g_field(game_field), points(0) {}
-  bool game_over();
-  bool use_of_arrows(int key);
-  int get_points();
 
-  void inc_points ();
+	Tetranom();
+	Tetranom(std::vector<std::vector<char>> coord_list, char id);
+  
+	void rotation();
+    std::vector<std::vector<int>> get_coordinates();
+	char get_block_type();
 };
+
+Tetranom o{ {{'1', '1'},
+			 {'1', '1'}},
+			 '1' };
+Tetranom i{ {{'0', '0', '0', '0', '0'},
+			 {'0', '0', '2', '0', '0'},
+			 {'0', '0', '2', '0', '0'},
+			 {'0', '0', '2', '0', '0'},
+			 {'0', '0', '2', '0', '0'}},
+			 '2' };
+Tetranom t{ {{'0', '3', '0'},
+			 {'3', '3', '3'}, 
+			 {'0', '0', '0'}},
+			 '3' };
+
 #endif
