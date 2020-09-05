@@ -4,7 +4,5 @@
 
 int main()
 {
-  Field main_field (10, 7);
-  Game new_game(&main_field);
   
 }
