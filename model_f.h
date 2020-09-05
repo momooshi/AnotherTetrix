@@ -5,11 +5,9 @@
 class Field
 {
 private:
-	int m_height;
-	int m_width;
-	std::vector <std::vector <int>> Matrix;
+	std::vector <std::vector <char>> Matrix;
 public:
-	Field(int height, int width);
+	Field();
 	void clean_row();
 	void create_figure();
 	bool collisions();

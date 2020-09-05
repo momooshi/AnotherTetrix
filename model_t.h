@@ -20,6 +20,8 @@ public:
 	char get_block_type();
 };
 
+//figures
+
 Tetranom o{ {{'1', '1'},
 			 {'1', '1'}},
 			 '1' };
