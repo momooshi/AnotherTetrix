@@ -2,7 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <algorithm>
-
+#include <iostream>
 Tetranom::Tetranom()
 {
 	m_id = '0';
@@ -40,17 +40,41 @@ char Tetranom::get_block_type()
 void Tetranom::rotation()
 {
 	//this method will change positions of each filled block with some trigonometric conversions (rotations' matrix)
-	std::vector<std::vector<int>> coordinates = get_coordinates();
+	//std::vector<std::vector<int>> coordinates = get_coordinates();
+	std::vector<std::vector<char>> rotate_coordinates=m_coordinates;
+	if (rotation_pointer % 2 == 0)
+	{
+		for (int i = 0; i < m_coordinates.size(); i++)
+		{
+			for (int j = 0; j < m_coordinates[i].size(); j++)
+			{
+				rotate_coordinates[j][i]=m_coordinates[i][j];
+			}
+		}
+		m_coordinates = rotate_coordinates;
+		rotation_pointer++;
+	}
+	else
+	{
+		for (int i = m_coordinates.size()-1, k=0; i >= 0; i--, k++)
+		{
+			for (int j = 0; j < m_coordinates[i].size(); j++)
+			{
+				rotate_coordinates[k][j] = m_coordinates[j][i];
+			}
+		}
+		m_coordinates = rotate_coordinates;
+		rotation_pointer++;
+	}
+}
+void Tetranom::show_tetranom()
+{
 	for (int i = 0; i < m_coordinates.size(); i++)
 	{
 		for (int j = 0; j < m_coordinates[i].size(); j++)
 		{
-			if (m_coordinates[i][j] != '0')
-			{
-				int new_x = j*cos(M_PI/2) + i*sin(M_PI/2);
-				int new_y = j*sin(M_PI/2) + i*cos(M_PI/2);
-				std::swap(m_coordinates[i][j], m_coordinates[new_y][new_x]);
-			}
+			std::cout<<m_coordinates[i][j];
 		}
+		std::cout << std::endl;
 	}
 }
